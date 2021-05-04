@@ -1,3 +1,3 @@
 
-rootProject.name = "learning-kotlin"
+rootProject.name = "kotlin-generics-demo"
 

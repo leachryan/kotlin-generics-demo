@@ -1,4 +1,6 @@
 package enums
 
-class CatBreeds {
+enum class CatBreeds {
+    TABBY,
+    TORTI
 }
