@@ -1,4 +1,3 @@
-
 import animals.Animal
 import animals.Cat
 import animals.Dog
@@ -63,12 +62,26 @@ class GenericsTest {
 
     @Test
     fun `test covariance`() {
+        val dog = Dog("Bud", DogBreeds.CORGI, 2)
 
+        val adoption = Adoption(dog)
+        val dogAdoption: Adoption<Animal> = adoption
+
+        assertEquals(dog, dogAdoption.getAdoption())
     }
 
     @Test
-    fun `test contrvariance`() {
+    fun `test contravariance`() {
+        val owner = Owner<Animal>()
+        val fido = Dog("Fido", DogBreeds.BORDER_COLLIE, 2)
+        val boots = Cat("Boots", CatBreeds.TABBY, 3)
 
+        owner.adopt(fido)
+        owner.adopt(boots)
+
+        val expected = listOf(Species.CANINE, Species.FELINE)
+
+        assertEquals(expected, owner.getPetSpecies())
     }
 
     @Test
@@ -88,7 +101,10 @@ class GenericsTest {
 
     @Test
     fun `test reified inline function`() {
+        val cat = Cat("Jazzy", CatBreeds.TORTI, 5)
+        val expected = "Summary - id: ${cat.id}, species: ${cat.species}, age: ${cat.age}, type: ${cat::class}"
 
+        assertEquals(expected, getAnimalSummary(cat))
     }
 
 }
